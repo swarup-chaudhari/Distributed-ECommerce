@@ -1,153 +1,309 @@
 # 🛒 Distributed E-Commerce Microservices
 
-A **scalable, event-driven distributed e-commerce backend** built using Java and Spring Boot. The project follows a **microservices architecture** where different business responsibilities are separated into independently deployable services.
+A scalable and event-driven **Distributed E-Commerce Microservices** application built using **Java, Spring Boot, Spring Cloud, Kafka, and distributed databases**.
 
-The system is being developed incrementally, starting with the core domain entities and gradually integrating communication, event-driven processing, security, resilience, and distributed transaction management.
+The project follows a microservices architecture where different business functionalities are separated into independent services. Communication between services will be handled using **event-driven architecture**, with **Saga** and **Event Sourcing** patterns planned for maintaining consistency across distributed services.
 
-## 🚀 Project Overview
+---
 
-This project simulates the backend architecture of a modern e-commerce platform using multiple independent microservices.
+## 📌 Project Overview
+
+The goal of this project is to build a modern e-commerce backend infrastructure that is:
+
+- Scalable
+- Distributed
+- Event-driven
+- Fault-tolerant
+- Independently deployable
+- Secure
+
+The system is divided into multiple microservices responsible for different parts of the e-commerce workflow.
 
 ### Planned Microservices
 
-- 🛍️ **Order Service** – Handles orders and order items
-- 📦 **Inventory Service** – Manages product stock and inventory operations
-- 💳 **Payment Service** – Handles payment processing
-- 🔔 **Notification Service** – Sends order/payment-related notifications
+- 🛒 **Order Service**
+- 📦 **Inventory Service**
+- 💳 **Payment Service**
+- 🔔 **Notification Service**
+- 🏷️ **Product Service**
+
+---
 
 ## 🏗️ Architecture
 
-The project is designed around:
+The project follows a **Microservices + Event-Driven Architecture**.
 
-- Microservices Architecture
-- Event-Driven Architecture
-- Saga Design Pattern
-- Event Sourcing
-- Asynchronous communication using Apache Kafka
-- API Gateway
-- Service Discovery
-- Distributed databases
-- Fault tolerance and resilience
+```text
+                    ┌─────────────────────┐
+                    │      Frontend       │
+                    │    React / Next.js  │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │     API Gateway     │
+                    └──────────┬──────────┘
+                               │
+          ┌────────────────────┼────────────────────┐
+          │                    │                    │
+          ▼                    ▼                    ▼
+   ┌─────────────┐      ┌─────────────┐      ┌─────────────┐
+   │ Order       │      │ Inventory   │      │ Product     │
+   │ Service     │      │ Service     │      │ Service     │
+   └──────┬──────┘      └─────────────┘      └─────────────┘
+          │
+          │ Events
+          ▼
+   ┌─────────────────┐
+   │      Kafka      │
+   └───────┬─────────┘
+           │
+      ┌────┴───────────────┐
+      │                    │
+      ▼                    ▼
+┌─────────────┐      ┌─────────────┐
+│ Payment     │      │ Notification│
+│ Service     │      │ Service     │
+└─────────────┘      └─────────────┘
+```
+
+---
+
+## 🚀 Current Development Progress
+
+### ✅ Completed
+
+- [x] Project architecture planning
+- [x] Spring Boot project setup
+- [x] Order Entity
+- [x] OrderItem Entity
+- [x] Inventory Entity
+- [x] Inventory Repository
+- [x] Inventory Service
+- [x] Inventory Controller
+- [x] Payment Entity
+- [x] Payment Repository
+- [x] Payment Service
+- [x] Payment Controller
+- [x] Product Entity
+- [x] Product Repository
+- [x] Product Service
+- [x] Product Controller
+- [x] Notification Entity
+- [x] Notification Repository
+- [x] Notification Service
+- [x] Notification Controller
+
+### 🔄 Upcoming
+
+- [ ] Kafka event communication
+- [ ] Kafka producers and consumers
+- [ ] Notification event handling
+- [ ] Order processing workflow
+- [ ] Inventory event handling
+- [ ] Payment event handling
+- [ ] API Gateway
+- [ ] Service Discovery
+- [ ] Saga Design Pattern
+- [ ] Event Sourcing
+- [ ] Resilience4j
+- [ ] OAuth2 / JWT authentication
+- [ ] Distributed database configuration
+- [ ] Dockerization
+- [ ] Kubernetes deployment
+- [ ] Monitoring and logging
+
+---
+
+## 🧩 Entities
+
+The backend currently contains the following core entities:
+
+### Order
+
+Represents customer orders and contains information related to the order lifecycle.
+
+### OrderItem
+
+Represents individual products/items associated with an order.
+
+### Product
+
+Represents products available in the e-commerce system.
+
+### Inventory
+
+Maintains product inventory and stock-related information.
+
+### Payment
+
+Handles payment-related information and payment status.
+
+### Notification
+
+Stores notification-related information for communicating important events to users.
+
+---
 
 ## 🛠️ Tech Stack
 
 ### Backend
+
 - Java 17+
 - Spring Boot
 - Spring Cloud
 - Spring Data JPA
 - Hibernate
+- REST APIs
 
 ### Messaging
+
 - Apache Kafka
+- Event-Driven Architecture
 
 ### Databases
+
 - PostgreSQL
 - MongoDB
 
-### Architecture & Infrastructure
-- Spring Cloud Gateway
-- Service Registry / Discovery
+### Distributed Architecture
+
+- API Gateway
+- Service Discovery
 - Saga Pattern
 - Event Sourcing
 - Resilience4j
-- OAuth2 / JWT
+
+### Security
+
+- OAuth2
+- JWT
 
 ### DevOps
+
 - Docker
 - Kubernetes
-- Git & GitHub
+- Git
+- GitHub
 
-## 📌 Current Progress
+### Frontend
 
-The project is currently under active development.
+- React
+- JavaScript
+- REST API integration
 
-### Completed
-- [x] Project architecture planning
-- [x] Order Entity
-- [x] OrderItem Entity
-
-### In Progress
-- [ ] Inventory Entity
-- [ ] Inventory Service
-- [ ] Order Service
-- [ ] Kafka event communication
-- [ ] Payment Service
-- [ ] Notification Service
-- [ ] API Gateway
-- [ ] Service Discovery
-- [ ] Saga implementation
-- [ ] Event Sourcing
-- [ ] Resilience4j
-- [ ] OAuth2 / JWT Security
-- [ ] Dockerization
-- [ ] Kubernetes deployment
-
-## 🎯 Main Goals
-
-- Build independently deployable microservices
-- Implement asynchronous communication with Kafka
-- Maintain consistency across distributed services
-- Implement the Saga pattern for distributed transactions
-- Handle service failures using Resilience4j
-- Implement secure authentication and authorization
-- Containerize services using Docker
-- Deploy the application using Kubernetes
+---
 
 ## 📂 Project Structure
 
 ```text
-distributed-ecommerce-microservices/
+Distributed-E-Commerce/
 │
-├── order-service/
+├── Backend/
+│   ├── Distributed-ECommerce/
+│   │   ├── src/
+│   │   │   ├── main/
+│   │   │   │   ├── java/
+│   │   │   │   │   └── com/example/demo/
+│   │   │   │   │       ├── controller/
+│   │   │   │   │       ├── entity/
+│   │   │   │   │       ├── repository/
+│   │   │   │   │       └── service/
+│   │   │   │   │
+│   │   │   │   └── resources/
+│   │   │   │       └── application.properties
+│   │   │   │
+│   │   │   └── test/
+│   │   │
+│   │   ├── pom.xml
+│   │   ├── mvnw
+│   │   └── mvnw.cmd
+│   │
+│   └── .gitignore
 │
-├── inventory-service/
+├── Frontend/
+│   └── ...
 │
-├── payment-service/
-│
-├── notification-service/
-│
-├── api-gateway/
-│
-├── service-registry/
-│
+├── .gitignore
 └── README.md
 ```
 
-## 🔄 Planned Order Flow
+---
 
-```text
-Customer
-   ↓
-API Gateway
-   ↓
-Order Service
-   ↓
-Kafka Event
-   ↓
-Inventory Service
-   ↓
-Payment Service
-   ↓
-Notification Service
-```
+## 🔄 Development Milestones
 
-The final implementation will use event-driven communication and the **Saga pattern** to coordinate operations across services without relying on distributed database transactions.
+| Milestone | Status |
+|---|---|
+| Project Architecture | ✅ Completed |
+| Order Entity | ✅ Completed |
+| OrderItem Entity | ✅ Completed |
+| Inventory Entity & Service | ✅ Completed |
+| Payment Entity & Service | ✅ Completed |
+| Product Entity & Service | ✅ Completed |
+| Notification Entity & Service | ✅ Completed |
+| Kafka Integration | 🔄 Upcoming |
+| Event Communication | 🔄 Upcoming |
+| API Gateway | 🔄 Upcoming |
+| Service Discovery | 🔄 Upcoming |
+| Saga Pattern | 🔄 Upcoming |
+| Event Sourcing | 🔄 Upcoming |
+| Resilience4j | 🔄 Upcoming |
+| OAuth2 / JWT | 🔄 Upcoming |
+| Docker | 🔄 Upcoming |
+| Kubernetes | 🔄 Upcoming |
+
+---
+
+## 🎯 Project Goals
+
+The main goals of this project are to understand and implement:
+
+- Microservices architecture
+- Event-driven communication
+- Kafka-based messaging
+- Distributed transactions
+- Saga pattern
+- Event sourcing
+- Fault tolerance
+- API Gateway
+- Service discovery
+- Authentication and authorization
+- Containerization
+- Kubernetes deployment
+
+---
 
 ## 📈 Future Improvements
 
-- Complete all microservices
-- Implement Kafka producers and consumers
-- Add distributed transaction handling
-- Add centralized configuration
-- Implement authentication and authorization
-- Add monitoring and logging
-- Add automated testing
-- Dockerize all services
-- Deploy the system using Kubernetes
+Future development will focus on:
 
-## 👨‍💻 Status
+1. Implementing Kafka-based asynchronous communication.
+2. Connecting Order, Inventory, Payment, and Notification services through events.
+3. Implementing the Saga pattern for distributed transaction management.
+4. Adding Event Sourcing for important business events.
+5. Implementing API Gateway and service discovery.
+6. Adding Resilience4j for fault tolerance.
+7. Implementing OAuth2/JWT security.
+8. Dockerizing individual services.
+9. Deploying the system using Kubernetes.
+10. Adding monitoring, logging, and distributed tracing.
 
-🚧 **Work in Progress**
+---
 
-This project is being developed step-by-step to demonstrate practical knowledge of **Java, Spring Boot, Microservices, Kafka, distributed systems, and cloud-native application development**.
+## 👨‍💻 Developer
+
+**Swarup Chaudhari**
+
+B.E. Artificial Intelligence & Data Science
+
+Pune, Maharashtra, India
+
+GitHub: [swarup-chaudhari](https://github.com/swarup-chaudhari)
+
+---
+
+## ⭐ Project Status
+
+🚧 **Under Active Development**
+
+The core entities and basic service layers have been implemented. The next major stage is integrating **Kafka and event-driven communication** between the microservices.
